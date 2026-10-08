@@ -7,7 +7,7 @@ const date = new Date().toLocaleDateString("bn-BD", {
 
 const Header = () => {
     return (
-        <div className="bg-[#E1E8E1]">
+        <div>
 
            <div className=" grid grid-cols-2 px-4 py-4 items-center max-w-7xl mx-auto">
              {/* Left Side */}
