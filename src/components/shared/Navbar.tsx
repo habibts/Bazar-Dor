@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 
+
 interface INav {
     id: string;
     slug: string;
@@ -11,7 +12,17 @@ interface INav {
 const Navbar = async () => {
 
     const res = await fetch(
-        "https://api.abcz.workers.dev/api/bazardor/categories")
+        "https://api.abcz.workers.dev/api/bazardor/categories",
+        {
+            next: {
+                revalidate: 0,
+            },
+        }
+    );
+
+    if (!res.ok) {
+        throw new Error(`Failed to fetch categories: ${res.status}`);
+    }
 
     const NavsData: INav[] = await res.json();
 
@@ -25,6 +36,8 @@ const Navbar = async () => {
                     </div>
                 </Link>)
             }
+
+            
         </div>
     );
 };

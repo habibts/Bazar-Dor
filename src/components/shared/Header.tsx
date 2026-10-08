@@ -1,6 +1,7 @@
 import { Button } from "@heroui/react";
 import Image from "next/image";
 
+
 const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
 });
@@ -40,6 +41,8 @@ const Header = () => {
            </div>
 
         </div>
+
+        
     );
 };
 
