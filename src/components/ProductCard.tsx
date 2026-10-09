@@ -77,7 +77,7 @@ const ProductCard = async () => {
                                     : product.change.dir === "down"
                                         ? "▼"
                                         : "—"}{" "}
-                                {Math.abs(product.change.pct)}%
+                                {Math.abs(product.change.pct).toLocaleString("bn-BD")}%
                             </span>
                         </div>
                     </div>

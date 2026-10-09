@@ -38,7 +38,10 @@ export default async function Home() {
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredProducts.map((product) => (
+          {filteredProducts
+  .sort((a, b) => a.today - b.today)
+  .slice(0, 6)
+  .map((product) => (
             <div
               key={product.id}
               className="rounded-3xl border border-gray-200 bg-[#FAFCFA] p-6 transition hover:shadow-md"
@@ -69,7 +72,7 @@ export default async function Home() {
                 </div>
 
                 <span className="rounded-full bg-green-50 px-3 py-2 text-sm font-semibold text-red-600">
-                  ▲ {Math.abs(product.change.pct)}%
+                  ▲ {Math.abs(product.change.pct).toLocaleString("bn-BD")}%
                 </span>
               </div>
             </div>
@@ -87,14 +90,16 @@ export default async function Home() {
 
         <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {products
-            .filter((product) => product.change.dir === "down")
-            .map((product) => (
+  .filter((product) => product.change.dir === "down")
+  .sort((a, b) => a.today - b.today)
+  .slice(0, 6)
+  .map((product) => (
               <div
                 key={product.id}
                 className="rounded-3xl border border-gray-200 bg-[#FAFCFA] p-6 transition hover:shadow-md"
               >
                 <div className="flex items-center gap-5">
-                  <div className="flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-[22px] bg-[#F0F5F0] text-4xl">
+                  <div className="flex h-21 w-21 shrink-0 items-center justify-center rounded-[22px] bg-[#F0F5F0] text-4xl">
                     {product.image}
                   </div>
 
@@ -119,7 +124,7 @@ export default async function Home() {
                   </div>
 
                   <span className="rounded-full bg-red-50 px-3 py-2 text-sm font-semibold  text-green-600">
-                    ▼ {Math.abs(product.change.pct)}%
+                    ▼ {Math.abs(product.change.pct).toLocaleString("bn-BD")}%
                   </span>
                 </div>
               </div>

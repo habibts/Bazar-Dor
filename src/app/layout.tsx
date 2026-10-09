@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/shared/Header";
 import Navbar from "@/components/shared/Navbar";
 import Marquee from "@/components/shared/Marquee";
+import Footer from "@/components/shared/Footer";
 
 
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
          <main className="w-full flex-1">
           {children}
         </main>
+        <Footer></Footer>
         </body>
     </html>
   );
