@@ -14,14 +14,8 @@ interface IProduct {
 }
 
 const Marquee = async () => {
-    const res = await fetch(
-        "https://api.abcz.workers.dev/api/bazardor/products",
-        {
-            next: {
-                revalidate: 0,
-            },
-        }
-    );
+    const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products")
+        
 
     if (!res.ok) {
         throw new Error(`Failed to fetch products: ${res.status}`);

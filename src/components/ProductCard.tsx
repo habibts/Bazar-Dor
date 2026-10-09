@@ -13,7 +13,7 @@ interface IProduct {
 }
 
 const ProductCard = async () => {
-    const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+    const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
     const products: IProduct[] = await res.json();
 
     return (
@@ -36,7 +36,7 @@ const ProductCard = async () => {
                     >
                         {/* Product Info */}
                         <div className="flex items-center gap-5">
-                            <div className="flex h-[84px] w-[84px] shrink-0 items-center justify-center rounded-[22px] bg-[#F0F5F0] text-4xl">
+                            <div className="flex h-21 w-21 shrink-0 items-center justify-center rounded-[22px] bg-[#F0F5F0] text-4xl">
                                 {product.image}
                             </div>
 
@@ -64,13 +64,12 @@ const ProductCard = async () => {
                             </div>
 
                             <span
-                                className={`rounded-full px-3 py-2 text-sm font-semibold ${
-                                    product.change.dir === "up"
+                                className={`rounded-full px-3 py-2 text-sm font-semibold ${product.change.dir === "up"
                                         ? "bg-green-50 text-green-600"
                                         : product.change.dir === "down"
                                             ? "bg-red-50 text-red-600"
                                             : "bg-gray-100 text-gray-500"
-                                }`}
+                                    }`}
                             >
                                 {product.change.dir === "up"
                                     ? "▲"
