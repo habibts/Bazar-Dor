@@ -48,7 +48,7 @@ const Marquee = async () => {
                         </span>
 
                         <span className="text-sm font-bold text-gray-900 sm:text-base">
-                            {product.today} টাকা
+                            {product.today.toLocaleString("bn-BD")} টাকা
                             <span className="ml-1">
                                 /{product.unit === "kg" ? "কেজি" : "লিটার"}
                             </span>
