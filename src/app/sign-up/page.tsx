@@ -47,7 +47,8 @@ const SignUpPage = () => {
             }
 
             toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
-            router.push("/sign-in");
+            router.push("/");
+            router.refresh();
         } catch {
             toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         } finally {
@@ -74,10 +75,15 @@ const SignUpPage = () => {
         }
     };
 
+    const handleGoogleSignIn=async()=>{
+        const data = await authClient.signIn.social({
+    provider: "google",
+  });
+    }
+
     return (
         <main className="min-h-screen bg-[#F0F5F0] px-4 py-10 sm:py-12">
             <div className="mx-auto max-w-3xl">
-                {/* Heading */}
                 <div className="mb-10 text-center">
                     <h1 className="text-3xl font-extrabold text-[#26352B] sm:text-4xl">
                         অ্যাকাউন্ট তৈরি করুন
@@ -88,13 +94,11 @@ const SignUpPage = () => {
                     </p>
                 </div>
 
-                {/* Sign Up Form */}
                 <div className="rounded-3xl border border-[#DFE8DF] bg-[#FAFCFA] p-5 sm:p-10">
                     <form
                         onSubmit={handleSignUp}
                         className="space-y-6"
                     >
-                        {/* Name */}
                         <div>
                             <label
                                 htmlFor="name"
@@ -118,7 +122,6 @@ const SignUpPage = () => {
                             />
                         </div>
 
-                        {/* Email */}
                         <div>
                             <label
                                 htmlFor="email"
@@ -142,7 +145,6 @@ const SignUpPage = () => {
                             />
                         </div>
 
-                        {/* Password */}
                         <div>
                             <label
                                 htmlFor="password"
@@ -167,7 +169,6 @@ const SignUpPage = () => {
                             />
                         </div>
 
-                        {/* Confirm Password */}
                         <div>
                             <label
                                 htmlFor="confirmPassword"
@@ -191,7 +192,6 @@ const SignUpPage = () => {
                             />
                         </div>
 
-                        {/* Submit */}
                         <button
                             type="submit"
                             disabled={loading}
@@ -203,7 +203,6 @@ const SignUpPage = () => {
                         </button>
                     </form>
 
-                    {/* Divider */}
                     <div className="my-7 flex items-center gap-4">
                         <div className="h-px flex-1 bg-gray-200" />
 
@@ -214,13 +213,10 @@ const SignUpPage = () => {
                         <div className="h-px flex-1 bg-gray-200" />
                     </div>
 
-                    {/* Social Sign Up */}
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         <button
                             type="button"
-                            onClick={() =>
-                                handleSocialSignUp("google")
-                            }
+                            onClick={handleGoogleSignIn}
                             className="flex items-center justify-center gap-2 rounded-xl border border-[#DFE8DF] px-3 py-4 font-semibold text-[#26352B] transition hover:bg-[#F0F5F0]"
                         >
                             <svg
@@ -268,7 +264,6 @@ const SignUpPage = () => {
                         </button>
                     </div>
 
-                    {/* Sign In Link */}
                     <p className="mt-8 text-center text-base text-[#26352B] sm:text-lg">
                         অ্যাকাউন্ট আছে?{" "}
                         <Link
@@ -280,7 +275,6 @@ const SignUpPage = () => {
                     </p>
                 </div>
 
-                {/* Home Link */}
                 <div className="mt-8 text-center">
                     <Link
                         href="/"

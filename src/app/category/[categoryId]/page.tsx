@@ -29,11 +29,11 @@ const ProductCategory = async ({ params }: IProps) => {
     const { categoryId } = await params;
 
     const productsRes = await fetch(
-        `https://api.api-store.workers.dev/api/bazardor/products?category=${categoryId}`
+        `https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`
     );
 
     const categoriesRes = await fetch(
-        "https://api.api-store.workers.dev/api/bazardor/categories"
+        "https://openapi.programming-hero.com/api/bazardor/categories"
     );
 
     if (!productsRes.ok || !categoriesRes.ok) {

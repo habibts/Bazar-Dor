@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif_Bengali } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import Header from "@/components/shared/Header";
 import Navbar from "@/components/shared/Navbar";
@@ -7,12 +8,9 @@ import Marquee from "@/components/shared/Marquee";
 import Footer from "@/components/shared/Footer";
 import { Toaster } from "react-hot-toast";
 
-
-
-const notoSerifBengali=Noto_Serif_Bengali({
-  subsets:["latin","bengali"]
-
-})
+const notoSerifBengali = Noto_Serif_Bengali({
+  subsets: ["latin", "bengali"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,19 +21,37 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-       data-theme="light"
+      data-theme="light"
       className={`${notoSerifBengali.className} h-full antialiased bg-[#F3FBF4]`}
     >
       <body className="min-h-full flex flex-col">
-        <Header></Header>
-        <Navbar></Navbar>
-        <Marquee></Marquee>
-         <main className="w-full flex-1">
-          {children}
-        </main>
-        <Toaster position="top-right"/>
-        <Footer></Footer>
-        </body>
+        <Header />
+
+        <Suspense
+          fallback={
+            <div className="py-4 text-center text-sm text-gray-500">
+              ক্যাটাগরি লোড হচ্ছে...
+            </div>
+          }
+        >
+          <Navbar />
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="py-4 text-center text-sm text-gray-500">
+              বাজারদরের তথ্য লোড হচ্ছে...
+            </div>
+          }
+        >
+          <Marquee />
+        </Suspense>
+
+        <main className="w-full flex-1">{children}</main>
+
+        <Toaster position="top-right" />
+        <Footer />
+      </body>
     </html>
   );
 }

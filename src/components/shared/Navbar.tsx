@@ -11,7 +11,7 @@ interface INav {
 
 const Navbar = async () => {
 
-    const res = await fetch("https://api.api-store.workers.dev/api/bazardor/categories");
+    const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
 
 
     const NavsData: INav[] = await res.json();
