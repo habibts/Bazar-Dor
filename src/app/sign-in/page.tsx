@@ -61,7 +61,11 @@ const SignInPage = () => {
             toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         }
     };
-
+    const handleGoogleSignIn=async()=>{
+            const data = await authClient.signIn.social({
+        provider: "google",
+      });
+    }
     return (
         <main className="min-h-screen bg-[#F0F5F0] px-4 py-10 sm:py-12">
             <div className="mx-auto max-w-3xl">
@@ -155,9 +159,7 @@ const SignInPage = () => {
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                         <button
                             type="button"
-                            onClick={() =>
-                                handleSocialSignIn("google")
-                            }
+                            onClick={handleGoogleSignIn}
                             className="flex items-center justify-center gap-2 rounded-xl border border-[#DFE8DF] px-3 py-4 font-semibold text-[#26352B] transition hover:bg-[#F0F5F0]"
                         >
                             <svg
