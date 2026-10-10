@@ -43,29 +43,35 @@ const SignInPage = () => {
         }
     };
 
-    const handleSocialSignIn = async (
-        provider: "google" | "github"
-    ) => {
+    const handleGoogleSignIn = async () => {
         try {
             const { error } = await authClient.signIn.social({
-                provider,
+                provider: "google",
                 callbackURL: "/",
             });
 
             if (error) {
-                toast.error(
-                    error.message || "Social sign in ব্যর্থ হয়েছে"
-                );
+                toast.error(error.message || "Google দিয়ে সাইন ইন ব্যর্থ হয়েছে");
             }
         } catch {
             toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         }
     };
-    const handleGoogleSignIn=async()=>{
-            const data = await authClient.signIn.social({
-        provider: "google",
-      });
-    }
+
+    const handleGithubSignIn = async () => {
+        try {
+            const { error } = await authClient.signIn.social({
+                provider: "github",
+                callbackURL: "/",
+            });
+
+            if (error) {
+                toast.error(error.message || "GitHub দিয়ে সাইন ইন ব্যর্থ হয়েছে");
+            }
+        } catch {
+            toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+        }
+    };
     return (
         <main className="min-h-screen bg-[#F0F5F0] px-4 py-10 sm:py-12">
             <div className="mx-auto max-w-3xl">
@@ -190,9 +196,7 @@ const SignInPage = () => {
 
                         <button
                             type="button"
-                            onClick={() =>
-                                handleSocialSignIn("github")
-                            }
+                            onClick={handleGithubSignIn}
                             className="flex items-center justify-center gap-2 rounded-xl border border-[#DFE8DF] px-3 py-4 font-semibold text-[#26352B] transition hover:bg-[#F0F5F0]"
                         >
                             <svg
