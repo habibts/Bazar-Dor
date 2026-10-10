@@ -5,6 +5,7 @@ import Header from "@/components/shared/Header";
 import Navbar from "@/components/shared/Navbar";
 import Marquee from "@/components/shared/Marquee";
 import Footer from "@/components/shared/Footer";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
          <main className="w-full flex-1">
           {children}
         </main>
+        <Toaster position="top-right"/>
         <Footer></Footer>
         </body>
     </html>
