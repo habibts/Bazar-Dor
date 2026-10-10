@@ -1,4 +1,5 @@
-import { Button } from "@heroui/react";
+"use client";
+
 import Image from "next/image";
 
 const date = new Date().toLocaleDateString("bn-BD", {
@@ -6,6 +7,13 @@ const date = new Date().toLocaleDateString("bn-BD", {
 });
 
 const Banner = () => {
+    const handleScroll = () => {
+        document.getElementById("সব-পণ্য")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    };
+
     return (
         <div className="mx-auto mt-10 flex max-w-7xl flex-col items-center justify-between gap-8 rounded-2xl border border-gray-200 bg-[#FAFCFA] p-6 sm:p-8 md:flex-row md:gap-10 lg:p-10">
             <div className="flex w-full flex-col items-start md:flex-1">
@@ -17,13 +25,20 @@ const Banner = () => {
                     আজকের বাজারের দাম এক নজরে
                 </h1>
 
-                <span className="mt-5 max-w-xl text-sm leading-7 text-gray-600 sm:text-base">
-                    চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
-                </span>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-gray-600 sm:text-base">
+                    চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম —
+                    বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং
+                    দামের পরিবর্তন এক জায়গায়।
+                </p>
 
-                <Button className="mt-7 rounded-lg bg-[#05893E] px-6 py-3 font-bold text-white transition-colors hover:bg-[#046F32]">
-                    সাইন আপ
-                </Button>
+                <button
+                    type="button"
+                    onClick={handleScroll}
+                    className="mt-7 inline-flex items-center gap-2 rounded-lg bg-[#05893E] px-6 py-3 font-bold text-white transition-colors hover:bg-[#046F32]"
+                >
+                    সব পণ্যের দাম দেখুন
+                    <span aria-hidden="true">→</span>
+                </button>
             </div>
 
             <div className="w-full md:flex-1">
@@ -31,7 +46,7 @@ const Banner = () => {
                     src="/bazar-hero.png"
                     height={600}
                     width={600}
-                    alt="hero Image"
+                    alt="বাজারের পণ্যের ছবি"
                     priority
                     className="h-auto w-full rounded-xl object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"

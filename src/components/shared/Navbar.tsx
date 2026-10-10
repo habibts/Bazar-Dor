@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-
+import NavbarLinks from "./NavLinks";
 
 interface INav {
     id: string;
@@ -10,26 +8,20 @@ interface INav {
 }
 
 const Navbar = async () => {
+    const res = await fetch(
+        "https://openapi.programming-hero.com/api/bazardor/categories",
+        {
+            cache: "no-store",
+        }
+    );
 
-    const res = await fetch("https://openapi.programming-hero.com/api/bazardor/categories");
-
+    if (!res.ok) {
+        throw new Error("ক্যাটাগরির তথ্য লোড করা যায়নি");
+    }
 
     const NavsData: INav[] = await res.json();
 
-    return (
-        <div className="flex gap-5 justify-center items-center border border-gray-200 bg-[#FAFCFA] py-5">
-            {
-                NavsData.map(nd => <Link key={nd.id} href={`/category/${nd.slug}`}>
-                    <div className="flex gap-1">
-                        <span>{nd.icon}</span>
-                        <span>{nd.nameBn}</span>
-                    </div>
-                </Link>)
-            }
-
-            
-        </div>
-    );
+    return <NavbarLinks navsData={NavsData} />;
 };
 
 export default Navbar;

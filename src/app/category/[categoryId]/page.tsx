@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import ProductCategoryClient from "@/components/category/ProductCategoryClient";
 
 interface IProps {
@@ -8,6 +9,7 @@ interface IProps {
 
 interface IProductCategory {
     id: string | number;
+    slug: string;
     nameBn: string;
     image: string;
     unit: string;
@@ -28,27 +30,33 @@ interface ICategory {
 const ProductCategory = async ({ params }: IProps) => {
     const { categoryId } = await params;
 
-    const productsRes = await fetch(
-        `https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`
-    );
-
-    const categoriesRes = await fetch(
-        "https://openapi.programming-hero.com/api/bazardor/categories"
-    );
+    const [productsRes, categoriesRes] = await Promise.all([
+        fetch(
+            `https://openapi.programming-hero.com/api/bazardor/products?category=${encodeURIComponent(categoryId)}`,
+            { cache: "no-store" }
+        ),
+        fetch(
+            "https://openapi.programming-hero.com/api/bazardor/categories",
+            { cache: "no-store" }
+        ),
+    ]);
 
     if (!productsRes.ok || !categoriesRes.ok) {
-        throw new Error("Failed to fetch category data");
+        throw new Error("ক্যাটাগরির তথ্য লোড করা যায়নি");
     }
 
     const productCategory: IProductCategory[] =
         await productsRes.json();
 
-    const categories: ICategory[] =
-        await categoriesRes.json();
+    const categories: ICategory[] = await categoriesRes.json();
 
     const category = categories.find(
         (item) => item.slug === categoryId
     );
+
+    if (!category) {
+        notFound();
+    }
 
     return (
         <ProductCategoryClient

@@ -26,8 +26,8 @@ const ProductCard = async () => {
     const products: IProduct[] = await res.json();
 
     return (
-        <div className="mx-auto mt-10 max-w-7xl px-4">
-            <div className="mb-6">
+        <div id="সব-পণ্য" className="mx-auto mt-10 max-w-7xl px-4 mb-6 scroll-mt-6">
+            <div  className="">
                 <h1 className="text-2xl font-bold text-[#26352B] sm:text-3xl">
                     সব পণ্য
                 </h1>
@@ -74,19 +74,18 @@ const ProductCard = async () => {
                             </div>
 
                             <span
-                                className={`rounded-full px-3 py-2 text-sm font-semibold ${
-                                    product.change.dir === "up"
+                                className={`rounded-full px-3 py-2 text-sm font-semibold ${product.change.dir === "up"
                                         ? "bg-green-50 text-green-600"
                                         : product.change.dir === "down"
-                                          ? "bg-red-50 text-red-600"
-                                          : "bg-gray-100 text-gray-500"
-                                }`}
+                                            ? "bg-red-50 text-red-600"
+                                            : "bg-gray-100 text-gray-500"
+                                    }`}
                             >
                                 {product.change.dir === "up"
                                     ? "▲"
                                     : product.change.dir === "down"
-                                      ? "▼"
-                                      : "—"}{" "}
+                                        ? "▼"
+                                        : "—"}{" "}
                                 {Math.abs(product.change.pct).toLocaleString("bn-BD")}%
                             </span>
                         </div>
