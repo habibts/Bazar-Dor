@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🛒 Bazar Dor (বাজার দর)
 
-First, run the development server:
+## Project Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Bazar Dor is a modern and responsive web application designed to make daily market prices of essential commodities in Bangladesh accessible in one place. Users can explore product prices, browse different categories, compare market prices, and track daily price changes through a clean and user-friendly interface.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The platform covers essential commodities such as rice, lentils, cooking oil, vegetables, fish, meat, eggs, milk, and spices.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js** — React framework for application development and routing.
+- **React** — Building interactive and reusable user interface components.
+- **TypeScript** — Improving code quality with static type checking.
+- **Tailwind CSS** — Creating responsive layouts and modern styling.
+- **HeroUI** — Building consistent and reusable UI components.
+- **Better Auth** — Managing user authentication and sessions.
+- **MongoDB** — Database integration for authentication.
+- **React Hot Toast** — Displaying success and error notifications.
+- **REST API** — Fetching product, category, and market price data.
+- **Git and GitHub** — Version control and source code management.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Daily Market Prices:** Explore current prices of essential commodities in one place.
+- **Product Categories:** Browse products by category, including rice, lentils, oil, vegetables, fish, meat, eggs and milk, and spices.
+- **Price Increase Tracking:** Identify products whose prices have increased.
+- **Price Decrease Tracking:** Find products whose prices have decreased.
+- **Product Details:** View individual product information, current prices, units, and price changes.
+- **Market Price Comparison:** Compare minimum and maximum prices across different markets.
+- **Price Summary:** View minimum, maximum, and estimated average prices based on available market data.
+- **User Authentication:** Register and sign in using the configured authentication methods.
+- **Protected Routes:** Restrict access to product details and profile pages to authenticated users.
+- **User Profile:** Access a dedicated profile area after signing in.
+- **Responsive Design:** Enjoy a consistent experience on mobile, tablet, and desktop devices.
+- **Bengali Interface:** Display product names, prices, and interface text in Bengali.
+- **Loading and Error Handling:** Provide appropriate feedback during data loading and when requested content is unavailable.
+- **Interactive Navigation:** Move easily between the home page, product categories, and product details.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Goal
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The goal of Bazar Dor is to simplify access to everyday market price information, help users understand price fluctuations, and make market comparisons easier through a centralized digital platform.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Bazar Dor — প্রয়োজনীয় পণ্যের দাম এক নজরে।**
+EOF
