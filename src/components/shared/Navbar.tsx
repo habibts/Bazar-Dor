@@ -11,7 +11,9 @@ const Navbar = async () => {
     const res = await fetch(
         "https://openapi.programming-hero.com/api/bazardor/categories",
         {
-            cache: "no-store",
+            next: {
+                revalidate: 3600,
+            },
         }
     );
 

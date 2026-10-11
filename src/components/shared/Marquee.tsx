@@ -46,7 +46,7 @@ const Marquee = async () => {
             className="w-full overflow-hidden border-y border-gray-200 bg-[#FAFCFA] py-2.5"
             aria-label="আজকের পণ্যের দামের চলমান তালিকা"
         >
-            <MarqueeText direction="right" duration={10}>
+            <MarqueeText direction="right" duration={7}>
                 {products.map((product) => (
                     <span
                         key={product.id}

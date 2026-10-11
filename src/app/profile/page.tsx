@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
@@ -11,8 +12,6 @@ const ProfilePage = () => {
 
     const { data: session, isPending } = authClient.useSession();
 
-    const [name, setName] = useState<string | null>(null);
-    const [isUpdating, setIsUpdating] = useState(false);
     const [isSigningOut, setIsSigningOut] = useState(false);
 
     // User logged in na thakle sign-in page e pathabe
@@ -22,47 +21,9 @@ const ProfilePage = () => {
         }
     }, [isPending, session, router]);
 
-    // Profile name update
-    const handleUpdateProfile = async (
-        e: FormEvent<HTMLFormElement>
-    ) => {
-        e.preventDefault();
-
-        if (!session) return;
-
-        const trimmedName = (name ?? session.user.name ?? "").trim();
-
-        if (!trimmedName) {
-            toast.error("আপনার নাম লিখুন");
-            return;
-        }
-
-        if (trimmedName === (session.user.name ?? "")) {
-            toast("কোনো পরিবর্তন করা হয়নি");
-            return;
-        }
-
-        setIsUpdating(true);
-
-        try {
-            const { error } = await authClient.updateUser({
-                name: trimmedName,
-            });
-
-            if (error) {
-                toast.error(
-                    error.message || "প্রোফাইল আপডেট করা যায়নি"
-                );
-                return;
-            }
-
-            setName(null);
-            toast.success("প্রোফাইল সফলভাবে আপডেট হয়েছে!");
-        } catch {
-            toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
-        } finally {
-            setIsUpdating(false);
-        }
+    // Update information page e niye jabe
+    const handleUpdateInformation = () => {
+        router.push("/profile/update");
     };
 
     // Sign out
@@ -99,7 +60,6 @@ const ProfilePage = () => {
     }
 
     const user = session.user;
-    const displayedName = name ?? user.name ?? "";
 
     return (
         <main className="min-h-screen bg-[#f0f5f0] px-4 py-10 sm:px-6 lg:px-8">
@@ -151,48 +111,29 @@ const ProfilePage = () => {
                         disabled={isSigningOut}
                         className="shrink-0 self-start rounded-xl border-2 border-red-500 px-5 py-3 font-semibold text-red-500 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50 sm:self-center sm:px-7 sm:py-4 sm:text-xl"
                     >
-                        {isSigningOut ? "সাইন আউট হচ্ছে..." : "↶ সাইন আউট"}
+                        {isSigningOut
+                            ? "সাইন আউট হচ্ছে..."
+                            : "↶ সাইন আউট"}
                     </button>
                 </section>
 
-                {/* Update profile form */}
+                {/* Update information section */}
                 <section className="mt-8 rounded-3xl border border-[#dce6dc] bg-[#fbfdfb] p-6 sm:p-9 lg:p-10">
                     <h2 className="text-2xl font-bold text-[#202b23]">
-                        তথ্য
+                        তথ্য আপডেট
                     </h2>
 
-                    <form
-                        onSubmit={handleUpdateProfile}
-                        className="mt-10 space-y-7 sm:px-5 sm:pt-2"
+                    <p className="mt-3 text-base text-gray-600 sm:text-lg">
+                        আপনার প্রোফাইলের নাম পরিবর্তন করতে নিচের বাটনে ক্লিক করুন।
+                    </p>
+
+                    <button
+                        type="button"
+                        onClick={handleUpdateInformation}
+                        className="mt-7 w-full rounded-xl bg-[#078b40] px-6 py-4 text-lg font-bold text-white shadow-md transition hover:bg-[#067535] sm:py-5 sm:text-xl"
                     >
-                        <div>
-                            <label
-                                htmlFor="name"
-                                className="mb-3 block text-lg font-medium text-[#202b23] sm:text-2xl"
-                            >
-                                নাম
-                            </label>
-
-                            <input
-                                id="name"
-                                type="text"
-                                value={displayedName}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="আপনার নাম লিখুন"
-                                required
-                                maxLength={100}
-                                className="w-full rounded-xl border border-[#dce6dc] bg-transparent px-4 py-4 text-base text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[#05893e] focus:ring-2 focus:ring-[#05893e]/20 sm:text-lg"
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={isUpdating}
-                            className="w-full rounded-xl bg-[#078b40] px-6 py-4 text-lg font-bold text-white shadow-md transition hover:bg-[#067535] disabled:cursor-not-allowed disabled:opacity-60 sm:py-5 sm:text-xl"
-                        >
-                            {isUpdating ? "আপডেট হচ্ছে..." : "আপডেট"}
-                        </button>
-                    </form>
+                        Update Information
+                    </button>
                 </section>
             </div>
         </main>

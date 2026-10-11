@@ -21,7 +21,7 @@ const SignUpPage = () => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            toast.error("দুটি পাসওয়ার্ড মিলছে না");
+            toast.error("পাসওয়ার্ড মিলছে না");
             return;
         }
 
@@ -56,6 +56,9 @@ const SignUpPage = () => {
         }
     };
 
+
+
+
     const handleSocialSignUp = async (
         provider: "google" | "github"
     ) => {
@@ -75,16 +78,11 @@ const SignUpPage = () => {
         }
     };
 
-    const handleGoogleSignUp = async () => {
-        const data = await authClient.signIn.social({
-            provider: "google",
-        });
-    }
-    const handleGithubSignUp = async () => {
-            const data = await authClient.signIn.social({
-                provider: "github",
-            });
-        }
+    const handleGoogleSignUp = () =>
+        handleSocialSignUp("google");
+
+    const handleGithubSignUp = () =>
+        handleSocialSignUp("github");
 
     return (
         <main className="min-h-screen bg-[#F0F5F0] px-4 py-10 sm:py-12">
@@ -116,7 +114,7 @@ const SignUpPage = () => {
                                 id="name"
                                 type="text"
                                 name="name"
-                                placeholder="যেমন: রহিম উদ্দিন"
+                                placeholder="...."
                                 value={name}
                                 onChange={(e) =>
                                     setName(e.target.value)

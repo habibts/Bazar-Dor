@@ -1,4 +1,4 @@
-import React from "react";
+
 import Link from "next/link";
 
 interface IProduct {
@@ -14,85 +14,109 @@ interface IProduct {
     };
 }
 
+const getUnitLabel = (unit: string) => {
+    const units: Record<string, string> = {
+        kg: "প্রতি কেজি",
+        liter: "প্রতি লিটার",
+        litre: "প্রতি লিটার",
+        l: "প্রতি লিটার",
+        dozen: "প্রতি ডজন",
+        piece: "প্রতি পিস",
+        pcs: "প্রতি পিস",
+    };
+
+    return units[unit.toLowerCase()] ?? `প্রতি ${unit}`;
+};
+
 const ProductCard = async () => {
     const res = await fetch(
-        "https://openapi.programming-hero.com/api/bazardor/products"
+        "https://openapi.programming-hero.com/api/bazardor/products",
+        { cache: "no-store" }
     );
 
     if (!res.ok) {
-        throw new Error("Failed to fetch products");
+        throw new Error("পণ্যের তথ্য লোড করা যায়নি");
     }
 
     const products: IProduct[] = await res.json();
 
     return (
-        <div id="সব-পণ্য" className="mx-auto mt-10 max-w-7xl px-4 mb-6 scroll-mt-6">
-            <div  className="">
-                <h1 className="text-2xl font-bold text-[#26352B] sm:text-3xl">
+        <section
+            id="সব-পণ্য"
+            className="mx-auto mb-6 mt-10 w-full max-w-7xl scroll-mt-60 px-3 sm:px-4"
+        >
+            <div>
+                <h2 className="text-2xl font-bold text-[#26352B] sm:text-3xl">
                     সব পণ্য
-                </h1>
+                </h2>
 
-                <span className="mt-2 block text-sm text-gray-500">
+                <p className="mt-2 text-sm text-gray-500 sm:text-base">
                     মোট {products.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে
-                </span>
+                </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {products.map((product) => (
-                    <Link
-                        key={product.id}
-                        href={`/product/${product.slug}`}
-                        className="block rounded-3xl border border-gray-200 bg-[#FAFCFA] p-6 transition hover:shadow-md"
-                    >
-                        <div className="flex items-center gap-5">
-                            <div className="flex h-21 w-21 shrink-0 items-center justify-center rounded-[22px] bg-[#F0F5F0] text-4xl">
-                                {product.image}
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-3">
+                {products.map((product) => {
+                    const isUp = product.change.dir === "up";
+                    const isDown = product.change.dir === "down";
+
+                    return (
+                        <Link
+                            key={product.id}
+                            href={`/product/${product.slug}`}
+                            className="group block min-w-0 rounded-3xl border border-gray-200 bg-[#FAFCFA] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-5"
+                        >
+                            <div className="flex items-center gap-4">
+                                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] bg-[#F0F5F0] text-3xl transition-transform duration-300 group-hover:scale-105 sm:h-20 sm:w-20 sm:text-4xl">
+                                    {product.image}
+                                </div>
+
+                                <div className="min-w-0">
+                                    <h3 className="wrap-break-word text-lg font-bold text-[#26352B] sm:text-xl">
+                                        {product.nameBn}
+                                    </h3>
+
+                                    <p className="mt-1 text-sm text-gray-600 sm:text-base">
+                                        {getUnitLabel(product.unit)}
+                                    </p>
+                                </div>
                             </div>
 
-                            <div className="min-w-0">
-                                <h3 className="text-xl font-bold text-[#26352B] sm:text-2xl">
-                                    {product.nameBn}
-                                </h3>
+                            <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-gray-100 pt-4">
+                                <div className="min-w-0">
+                                    <p className="text-sm text-gray-600">
+                                        আজকের দাম
+                                    </p>
 
-                                <p className="mt-1 text-base text-gray-600 sm:text-lg">
-                                    {product.unit === "kg"
-                                        ? "প্রতি কেজি"
-                                        : "প্রতি লিটার"}
-                                </p>
-                            </div>
-                        </div>
+                                    <p className="mt-1 wrap-break-word text-xl font-bold tracking-tight text-[#26352B] sm:text-2xl">
+                                        {product.today.toLocaleString("bn-BD")} টাকা
+                                    </p>
+                                </div>
 
-                        <div className="mt-6 flex items-end justify-between gap-3">
-                            <div>
-                                <p className="text-base text-gray-700">
-                                    আজকের দাম
-                                </p>
-
-                                <p className="mt-1 text-2xl font-bold tracking-tight text-[#26352B] sm:text-3xl">
-                                    {product.today.toLocaleString("bn-BD")} টাকা
-                                </p>
-                            </div>
-
-                            <span
-                                className={`rounded-full px-3 py-2 text-sm font-semibold ${product.change.dir === "up"
-                                        ? "bg-green-50 text-green-600"
-                                        : product.change.dir === "down"
+                                <span
+                                    className={`shrink-0 rounded-full px-3 py-2 text-sm font-semibold ${
+                                        isUp
                                             ? "bg-red-50 text-red-600"
-                                            : "bg-gray-100 text-gray-500"
+                                            : isDown
+                                              ? "bg-green-50 text-green-600"
+                                              : "bg-gray-100 text-gray-500"
                                     }`}
-                            >
-                                {product.change.dir === "up"
-                                    ? "▲"
-                                    : product.change.dir === "down"
-                                        ? "▼"
-                                        : "—"}{" "}
-                                {Math.abs(product.change.pct).toLocaleString("bn-BD")}%
-                            </span>
-                        </div>
-                    </Link>
-                ))}
+                                >
+                                    {isUp ? "▲" : isDown ? "▼" : "—"}{" "}
+                                    {Math.abs(product.change.pct).toLocaleString("bn-BD")}%
+                                </span>
+                            </div>
+                        </Link>
+                    );
+                })}
             </div>
-        </div>
+
+            {products.length === 0 && (
+                <p className="mt-6 text-gray-500">
+                    বর্তমানে কোনো পণ্য পাওয়া যায়নি।
+                </p>
+            )}
+        </section>
     );
 };
 

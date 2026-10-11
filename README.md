@@ -44,4 +44,3 @@ The goal of Bazar Dor is to simplify access to everyday market price information
 ---
 
 **Bazar Dor — প্রয়োজনীয় পণ্যের দাম এক নজরে।**
-EOF

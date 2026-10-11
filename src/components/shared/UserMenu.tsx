@@ -1,15 +1,20 @@
+
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
 const UserMenu = () => {
+    const router = useRouter();
+
     const { data: session, isPending } = authClient.useSession();
     const [isOpen, setIsOpen] = useState(false);
+    const [isSigningOut, setIsSigningOut] = useState(false);
 
     if (isPending) return null;
 
@@ -33,6 +38,31 @@ const UserMenu = () => {
     }
 
     const user = session.user;
+
+    const handleSignOut = async () => {
+        if (isSigningOut) return;
+
+        setIsSigningOut(true);
+
+        try {
+            const { error } = await authClient.signOut();
+
+            if (error) {
+                toast.error("লগআউট করা যায়নি");
+                return;
+            }
+
+            setIsOpen(false);
+            router.replace("/");
+            router.refresh();
+
+            toast.success("লগআউট সফল হয়েছে!");
+        } catch {
+            toast.error("সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+        } finally {
+            setIsSigningOut(false);
+        }
+    };
 
     return (
         <div className="relative">
@@ -65,7 +95,7 @@ const UserMenu = () => {
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 z-50 mt-2 w-60 rounded-xl border border-gray-200 bg-white p-3 text-gray-800 shadow-lg">
+                <div className="absolute right-0 z-[9999] mt-2 w-60 rounded-xl border border-gray-200 bg-white p-3 text-gray-800 shadow-lg">
                     <div className="border-b border-gray-100 px-2 pb-3">
                         <p className="truncate font-semibold">
                             {user.name}
@@ -86,20 +116,11 @@ const UserMenu = () => {
 
                     <button
                         type="button"
-                        onClick={async () => {
-                            const { error } = await authClient.signOut();
-
-                            if (error) {
-                                toast.error("লগআউট করা যায়নি");
-                                return;
-                            }
-
-                            setIsOpen(false);
-                            toast.success("লগআউট সফল হয়েছে!");
-                        }}
-                        className="mt-1 w-full rounded-lg px-3 py-2 text-left text-red-600 hover:bg-red-50"
+                        onClick={handleSignOut}
+                        disabled={isSigningOut}
+                        className="mt-1 w-full rounded-lg px-3 py-2 text-left text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                        লগআউট
+                        {isSigningOut ? "লগআউট হচ্ছে..." : "লগআউট"}
                     </button>
                 </div>
             )}
