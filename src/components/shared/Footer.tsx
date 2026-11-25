@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
     return (
         <footer className="mt-10 border-t border-gray-200 bg-[#FAFCFA] py-8 sm:py-10">
@@ -17,9 +19,27 @@ const Footer = () => {
                             দ্রুত লিংক
                         </h4>
                         <ul className="mt-2 space-y-1 text-sm text-gray-500">
-                            <li>হোম</li>
-                            <li>সব পণ্য</li>
-                            <li>প্রোফাইল</li>
+                            <li>
+                                <Link href="/" className="hover:text-[#05893E]">
+                                    হোম
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/#সব-পণ্য"
+                                    className="hover:text-[#05893E]"
+                                >
+                                    সব পণ্য
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/profile"
+                                    className="hover:text-[#05893E]"
+                                >
+                                    প্রোফাইল
+                                </Link>
+                            </li>
                         </ul>
                     </div>
 
