@@ -19,8 +19,7 @@ const NavLinks = ({ navsData }: IProps) => {
 
     return (
         <nav className="w-full border-b border-gray-200 bg-[#FAFCFA]">
-            <div className="pl-15">
-                <div className="mx-auto flex w-full max-w-7xl items-center pl-6 gap-2 overflow-x-auto px-3 py-3 sm:gap-3 sm:px-4 sm:py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="mx-auto flex w-full max-w-7xl items-center gap-2 overflow-x-auto px-3 py-3 sm:gap-3 sm:px-4 sm:py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {/* Home Link */}
                 <Link
                     href="/"
@@ -58,7 +57,6 @@ const NavLinks = ({ navsData }: IProps) => {
                         </Link>
                     );
                 })}
-            </div>
             </div>
         </nav>
     );

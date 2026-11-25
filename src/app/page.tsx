@@ -16,6 +16,13 @@ interface IProduct {
     };
 }
 
+interface ICategory {
+    id: string;
+    slug: string;
+    nameBn: string;
+    icon: string;
+}
+
 const getUnitLabel = (unit: string) => {
     const units: Record<string, string> = {
         kg: "প্রতি কেজি",
@@ -82,16 +89,25 @@ const PriceCard = ({ product }: { product: IProduct }) => {
 };
 
 export default async function Home() {
-    const res = await fetch(
-        "https://openapi.programming-hero.com/api/bazardor/products",
-        { cache: "no-store" }
-    );
+    const [productsRes, categoriesRes] = await Promise.all([
+        fetch(
+            "https://openapi.programming-hero.com/api/bazardor/products",
+            { cache: "no-store" }
+        ),
+        fetch(
+            "https://openapi.programming-hero.com/api/bazardor/categories",
+            { cache: "no-store" }
+        ),
+    ]);
 
-    if (!res.ok) {
+    if (!productsRes.ok) {
         throw new Error("পণ্যের তথ্য লোড করা যায়নি");
     }
 
-    const products: IProduct[] = await res.json();
+    const products: IProduct[] = await productsRes.json();
+    const categories: ICategory[] = categoriesRes.ok
+        ? await categoriesRes.json()
+        : [];
 
     // Top 6 products with the largest price increases
     const increasedProducts = products
@@ -114,6 +130,28 @@ export default async function Home() {
     return (
         <>
             <Banner />
+
+            {/* Categories */}
+            <section className="mx-auto mt-10 w-full max-w-7xl px-3 sm:mt-12 sm:px-4">
+                <h2 className="text-2xl font-bold text-[#26352B] sm:text-3xl">
+                    ক্যাটাগরি অনুযায়ী ব্রাউজ করুন
+                </h2>
+
+                <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+                    {categories.map((category) => (
+                        <Link
+                            key={category.id}
+                            href={`/category/${category.id}`}
+                            className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-[#FAFCFA] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                        >
+                            <span className="text-2xl">{category.icon}</span>
+                            <span className="font-semibold text-[#26352B]">
+                                {category.nameBn}
+                            </span>
+                        </Link>
+                    ))}
+                </div>
+            </section>
 
             {/* Price Increased */}
             <section className="mx-auto mt-10 w-full max-w-7xl px-3 sm:mt-12 sm:px-4">
