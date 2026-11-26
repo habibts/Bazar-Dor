@@ -1,46 +1,281 @@
-
 # 🛒 Bazar Dor (বাজার দর)
 
-## Project Description
+### Bangladesh Daily Market Price Tracker
 
-Bazar Dor is a modern and responsive web application designed to make daily market prices of essential commodities in Bangladesh accessible in one place. Users can explore product prices, browse different categories, compare market prices, and track daily price changes through a clean and user-friendly interface.
+**Bazar Dor** is a modern, responsive web application designed to make daily commodity prices in Bangladesh easily accessible. It provides a centralized platform where users can explore essential product prices, compare market rates, monitor price fluctuations, and make informed purchasing decisions.
 
-The platform covers essential commodities such as rice, lentils, cooking oil, vegetables, fish, meat, eggs, milk, and spices.
-
-## Technologies Used
-
-- **Next.js** — React framework for application development and routing.
-- **React** — Building interactive and reusable user interface components.
-- **TypeScript** — Improving code quality with static type checking.
-- **Tailwind CSS** — Creating responsive layouts and modern styling.
-- **HeroUI** — Building consistent and reusable UI components.
-- **Better Auth** — Managing user authentication and sessions.
-- **MongoDB** — Database integration for authentication.
-- **React Hot Toast** — Displaying success and error notifications.
-- **REST API** — Fetching product, category, and market price data.
-- **Git and GitHub** — Version control and source code management.
-
-## Features
-
-- **Daily Market Prices:** Explore current prices of essential commodities in one place.
-- **Product Categories:** Browse products by category, including rice, lentils, oil, vegetables, fish, meat, eggs and milk, and spices.
-- **Price Increase Tracking:** Identify products whose prices have increased.
-- **Price Decrease Tracking:** Find products whose prices have decreased.
-- **Product Details:** View individual product information, current prices, units, and price changes.
-- **Market Price Comparison:** Compare minimum and maximum prices across different markets.
-- **Price Summary:** View minimum, maximum, and estimated average prices based on available market data.
-- **User Authentication:** Register and sign in using the configured authentication methods.
-- **Protected Routes:** Restrict access to product details and profile pages to authenticated users.
-- **User Profile:** Access a dedicated profile area after signing in.
-- **Responsive Design:** Enjoy a consistent experience on mobile, tablet, and desktop devices.
-- **Bengali Interface:** Display product names, prices, and interface text in Bengali.
-- **Loading and Error Handling:** Provide appropriate feedback during data loading and when requested content is unavailable.
-- **Interactive Navigation:** Move easily between the home page, product categories, and product details.
-
-## Project Goal
-
-The goal of Bazar Dor is to simplify access to everyday market price information, help users understand price fluctuations, and make market comparisons easier through a centralized digital platform.
+The platform focuses on transparency, accessibility, and a user-friendly experience, helping consumers stay informed about the daily cost of essential goods.
 
 ---
 
-**Bazar Dor — প্রয়োজনীয় পণ্যের দাম এক নজরে।**
+## 🌟 Overview
+
+In Bangladesh, the prices of essential commodities frequently fluctuate across markets. Keeping track of these changes can be difficult for ordinary consumers.
+
+**Bazar Dor** aims to solve this problem by providing a digital platform that brings essential commodity prices together in one place, allowing users to:
+
+- Check daily prices of essential commodities.
+- Browse products by category.
+- Compare prices across different markets.
+- Monitor price increases and decreases.
+- View detailed product price information.
+- Access market information through a responsive and Bengali-friendly interface.
+
+---
+
+## ✨ Features
+
+### 📊 Daily Market Prices
+Explore the latest available prices of essential commodities in Bangladesh through a centralized dashboard.
+
+### 🗂️ Product Categories
+Browse products organized into different categories:
+
+- 🌾 Rice
+- 🫘 Lentils
+- 🛢️ Cooking Oil
+- 🥬 Vegetables
+- 🐟 Fish
+- 🥩 Meat
+- 🥚 Eggs & Milk
+- 🌶️ Spices
+
+### 📈 Price Trend Monitoring
+- Identify products with increasing prices.
+- Find products with decreasing prices.
+- Track price fluctuations compared with previous available data.
+
+### 🔍 Product Details
+View detailed information about individual commodities, including:
+
+- Product name
+- Product category
+- Current price
+- Measurement unit
+- Price change
+- Available market price information
+
+### ⚖️ Market Price Comparison
+Compare commodity prices across different markets to identify:
+
+- Minimum available price
+- Maximum available price
+- Estimated average price
+- Market-to-market price differences
+
+### 🔐 Authentication & User Management
+- User registration and login
+- Secure authentication with Better Auth
+- Session management
+- Protected routes
+- Authenticated user profile
+
+### 👤 User Profile
+Access a personalized profile section through the authentication system.
+
+### 🇧🇩 Bengali-Friendly Interface
+Designed with Bengali users in mind, featuring Bengali product names, prices, and interface content where applicable.
+
+### 📱 Responsive Design
+Optimized for different screen sizes and devices:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+### ⚡ Interactive User Experience
+- Smooth navigation
+- Reusable UI components
+- Loading states
+- Error handling
+- Success and error notifications
+- Clean and intuitive interface
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| **Next.js** | Full-stack React framework and application routing |
+| **React** | Interactive UI development |
+| **TypeScript** | Static typing and improved code reliability |
+| **Tailwind CSS** | Responsive styling and utility-first design |
+| **HeroUI** | Modern and reusable UI components |
+| **Better Auth** | Authentication and session management |
+| **MongoDB** | Database for authentication and user data |
+| **React Hot Toast** | User feedback and notifications |
+| **REST API** | Data fetching and API communication |
+| **Git** | Version control |
+| **GitHub** | Repository hosting and collaboration |
+
+---
+
+## 🏗️ Project Architecture
+
+Bazar Dor follows a modern web application architecture built around Next.js.
+
+```text
+┌──────────────────────────────┐
+│          Frontend           │
+│   Next.js + React + TS       │
+│   Tailwind CSS + HeroUI      │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│       Application Logic     │
+│   Routing • Authentication   │
+│   Protected Routes • APIs    │
+└──────────────┬───────────────┘
+               │
+       ┌───────┴────────┐
+       ▼                ▼
+┌──────────────┐ ┌──────────────┐
+│  REST APIs   │ │  Better Auth │
+│ Market Data  │ │   Sessions   │
+└──────────────┘ └──────┬───────┘
+                       │
+                       ▼
+                ┌──────────────┐
+                │   MongoDB    │
+                │ User Data    │
+                └──────────────┘
+```
+
+---
+
+## 📂 Product Categories
+
+| Category | Example Products |
+|---|---|
+| Rice | Miniket, Najirshail, Basmati |
+| Lentils | Masoor Dal, Moong Dal, Chickpeas |
+| Cooking Oil | Soybean Oil, Palm Oil |
+| Vegetables | Potato, Onion, Tomato, Brinjal |
+| Fish | Rui, Katla, Tilapia |
+| Meat | Beef, Chicken, Mutton |
+| Eggs & Milk | Eggs, Milk |
+| Spices | Turmeric, Chili, Garlic, Ginger |
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally.
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js
+- npm
+- Git
+- MongoDB database
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/bazar-dor.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd bazar-dor
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the root directory and configure the required environment variables.
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+BETTER_AUTH_SECRET=your_auth_secret
+BETTER_AUTH_URL=http://localhost:3000
+```
+
+> Configure additional environment variables if required by your API or application setup.
+
+### 5. Run the Development Server
+
+```bash
+npm run dev
+```
+
+### 6. Open the Application
+
+Visit:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## 🎯 Project Goals
+
+The primary objectives of Bazar Dor are:
+
+- **Accessibility:** Make daily market price information easily accessible.
+- **Transparency:** Provide clear commodity pricing information.
+- **Awareness:** Help consumers understand price fluctuations.
+- **Comparison:** Enable users to compare prices across markets.
+- **Convenience:** Reduce the effort required to find essential commodity prices.
+- **Digital Innovation:** Introduce a modern digital solution for everyday market information in Bangladesh.
+
+---
+
+## 🔮 Future Improvements
+
+Potential future enhancements include:
+
+- 📉 Historical price charts and analytics
+- 🔔 Price alerts and notifications
+- 📍 Location-based market prices
+- 🏪 More local market coverage
+- 📅 Weekly and monthly price reports
+- ❤️ Favorite products and watchlists
+- 🧾 Shopping list functionality
+- 📊 Advanced market analytics
+- 🌐 Improved multilingual support
+- 📲 Progressive Web App (PWA) support
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, bug reports, and feature requests are welcome.
+
+If you would like to contribute:
+
+1. Fork the repository.
+2. Create a new feature branch.
+3. Commit your changes.
+4. Push your branch.
+5. Submit a Pull Request.
+
+---
+
+## 📄 License
+
+This project is developed for educational and practical purposes. A license can be added to the repository to define the terms of use and distribution.
+
+---
+
+<div align="center">
+
+### 🛒 Bazar Dor — বাজার দর
+
+**Making everyday market prices easier to access, compare, and understand.**
+
+Made with ❤️ in Bangladesh 🇧🇩
+
+</div>
